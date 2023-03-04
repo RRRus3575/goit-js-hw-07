@@ -1,6 +1,8 @@
 "use strink";
 import { galleryItems } from "./gallery-items.js";
 
+const basicLightbox = window.basicLightbox;
+let instance = null;
 const containerEl = document.querySelector(".gallery");
 
 const cardsMarcup = createImageEl(galleryItems);
@@ -13,8 +15,7 @@ function createImageEl(images) {
       return `
     <div class="gallery__item">
     <a class="gallery__link" href ='${original}'>
-    <img class='gallery__image' src='${preview}' alt='${description}' data-source="${original}"
-    '>
+    <img class='gallery__image' src='${preview}' alt='${description}' data-source='${original}'>
     </a>
     </div>
     `;
@@ -27,14 +28,25 @@ containerEl.addEventListener("click", openImgClick);
 function openImgClick(event) {
   event.preventDefault();
 
-  if (!event.target.nodeName !== "IMG") {
+  if (event.target.nodeName !== "IMG") {
     return;
   }
-  const modalImg = event.target.dataset.source;
 
-  const instance = basicLightbox.create(
-    `<img src="${modalImg}" width="800" height="600">`
+  document.addEventListener("keydown", closeEsc);
+  const modal = event.target.dataset.source;
+
+  console.log(modal);
+
+  instance = basicLightbox.create(
+    `<img src="${modal}" width="800" height="600">`
   );
 
   instance.show();
+}
+
+function closeEsc(event) {
+  if (event.code === "Escape" && instance.visible()) {
+    instance.close();
+    document.removeEventListener("keydown", closeEsc);
+  }
 }
