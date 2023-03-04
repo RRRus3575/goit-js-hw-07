@@ -33,6 +33,7 @@ function openImgClick(event) {
   }
 
   document.addEventListener("keydown", closeEsc);
+
   const modal = event.target.dataset.source;
 
   console.log(modal);
