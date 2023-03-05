@@ -30,11 +30,6 @@ function openImgClick(event) {
     return;
   }
 
-  document.addEventListener("keydown", closeEsc);
-  const modal = event.target.dataset.source;
-
-  console.log(modal);
-
   var lightbox = new SimpleLightbox(".gallery a", {
     captionSelector: "img",
     captionsData: "alt",
@@ -42,11 +37,4 @@ function openImgClick(event) {
     captionDelay: 250,
     scrollZoom: false,
   });
-}
-
-function closeEsc(event) {
-  if (event.code === "Escape" && lightbox.visible()) {
-    lightbox.close();
-    document.removeEventListener("keydown", closeEsc);
-  }
 }
