@@ -19,22 +19,11 @@ function createImageEl(images) {
     })
     .join("");
 }
-console.log(cardsMarcup);
 
-containerEl.addEventListener("click", openImgClick);
-
-function openImgClick(event) {
-  event.preventDefault();
-
-  if (event.target.nodeName !== "IMG") {
-    return;
-  }
-
-  var lightbox = new SimpleLightbox(".gallery a", {
-    captionSelector: "img",
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionDelay: 250,
-    scrollZoom: false,
-  });
-}
+var lightbox = new SimpleLightbox(".gallery a", {
+  captionSelector: "img",
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+  scrollZoom: false,
+});
